@@ -10,7 +10,7 @@ class App extends React.Component {
   
   async componentDidMount(){
     this.setState({isLoading : true});
-    const res = await axios.get('https://api.github.com/users')
+    const res = await axios.get(`https://api.github.com/users?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
     this.setState({users : res.data, isLoading : false})
   }
 
@@ -18,7 +18,6 @@ class App extends React.Component {
   return (
     <div className="App">
       <Navbar/>
-      {/* {this.state.isLoading ? <h1>Hello World </h1> : <h1>{this.name()}</h1> } */}
       <div className="container">
         <User loading = {this.state.isLoading} users={this.state.users}/>
 
